@@ -96,9 +96,7 @@ class _BMISetStatePageState extends State<BMISetStatePage> {
                     turnOffGrouping: true,
                   ),
                 ],
-                onChanged: (String value) {
-                  setState(() {});
-                },
+                onChanged: (String value) {},
               ),
               TextFormField(
                 controller: heightController,
@@ -112,15 +110,11 @@ class _BMISetStatePageState extends State<BMISetStatePage> {
                     turnOffGrouping: true,
                   ),
                 ],
-                onChanged: (String value) {
-                  setState(() {});
-                },
+                onChanged: (String value) {},
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  setState(() {});
-                },
+                onPressed: () {},
                 child: const Text('Calculate BMI'),
               ),
             ],
