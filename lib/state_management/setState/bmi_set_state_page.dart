@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+import 'package:intl/intl.dart';
 
 import 'package:state_management/widgets/bmi_gauge.dart';
 
@@ -12,9 +15,23 @@ class BMISetStatePage extends StatefulWidget {
 }
 
 class _BMISetStatePageState extends State<BMISetStatePage> {
+  final formKey = GlobalKey<FormState>();
   final weightController = TextEditingController();
   final heightController = TextEditingController();
   var bmi = 0.0;
+
+  Future<void> _calculateBMI({
+    required double weight,
+    required double height,
+  }) async {
+    setState(() {
+      bmi = 0.0;
+    });
+    await Future.delayed(const Duration(seconds: 1));
+    setState(() {
+      bmi = weight / pow(height, 2);
+    });
+  }
 
   @override
   void dispose() {
@@ -25,57 +42,82 @@ class _BMISetStatePageState extends State<BMISetStatePage> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: avoid_print
+    print('build');
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BMI | SetState'),
+        title: const Text('BMI | setState'),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              BMIGauge(bmi: bmi),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: weightController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Weight'),
-                inputFormatters: [
-                  CurrencyTextInputFormatter(
-                    locale: 'pt_BR',
-                    symbol: '',
-                    decimalDigits: 2,
-                    turnOffGrouping: true,
-                  ),
-                ],
-                onChanged: (String value) {
-                  setState(() {});
-                },
-              ),
-              TextFormField(
-                controller: heightController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Height'),
-                inputFormatters: [
-                  CurrencyTextInputFormatter(
-                    locale: 'pt_BR',
-                    symbol: '',
-                    decimalDigits: 2,
-                    turnOffGrouping: true,
-                  ),
-                ],
-                onChanged: (String value) {
-                  setState(() {});
-                },
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {});
-                },
-                child: const Text('Calculate BMI'),
-              ),
-            ],
+        child: Form(
+          key: formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                BMIGauge(bmi: bmi),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: weightController,
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Mandatory Weight';
+                    }
+                  },
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(labelText: 'Weight'),
+                  inputFormatters: [
+                    CurrencyTextInputFormatter(
+                      locale: 'pt_BR',
+                      symbol: '',
+                      decimalDigits: 2,
+                      turnOffGrouping: true,
+                    ),
+                  ],
+                  onChanged: (String value) {},
+                ),
+                TextFormField(
+                  controller: heightController,
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Mandatory Height';
+                    }
+                  },
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(labelText: 'Height'),
+                  inputFormatters: [
+                    CurrencyTextInputFormatter(
+                      locale: 'pt_BR',
+                      symbol: '',
+                      decimalDigits: 2,
+                      turnOffGrouping: true,
+                    ),
+                  ],
+                  onChanged: (String value) {},
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    var formValid = formKey.currentState?.validate() ?? false;
+                    if (formValid) {
+                      var formatter = NumberFormat.simpleCurrency(
+                        locale: 'pt_BR',
+                        decimalDigits: 2,
+                      );
+                      double weight =
+                          formatter.parse(weightController.text) as double;
+                      double height =
+                          formatter.parse(heightController.text) as double;
+                      _calculateBMI(
+                        weight: weight,
+                        height: height,
+                      );
+                    }
+                  },
+                  child: const Text('Calculate BMI'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
