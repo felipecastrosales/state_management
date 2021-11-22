@@ -11,6 +11,7 @@ dependencies:
   currency_text_input_formatter: ^2.0.1
   flutter:
     sdk: flutter
+  intl: ^0.17.0
   syncfusion_flutter_gauges: ^19.2.46
 
 dev_dependencies:
