@@ -1,9 +1,6 @@
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 
-import 'package:syncfusion_flutter_gauges/gauges.dart';
-
-import 'package:state_management/widgets/bmi_gauge_range.dart';
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 
 import 'bmi_gauge.dart';
 

@@ -1,10 +1,8 @@
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
+
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
+
 import 'package:state_management/widgets/bmi_gauge.dart';
-
-import 'package:syncfusion_flutter_gauges/gauges.dart';
-
-import 'package:state_management/widgets/bmi_gauge_range.dart';
 
 class BMISetStatePage extends StatefulWidget {
   const BMISetStatePage({Key? key}) : super(key: key);
@@ -16,6 +14,7 @@ class BMISetStatePage extends StatefulWidget {
 class _BMISetStatePageState extends State<BMISetStatePage> {
   final weightController = TextEditingController();
   final heightController = TextEditingController();
+  var bmi = 0.0;
 
   @override
   void dispose() {
@@ -35,7 +34,7 @@ class _BMISetStatePageState extends State<BMISetStatePage> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              BMIGauge(bmi: 15),
+              BMIGauge(bmi: bmi),
               const SizedBox(height: 20),
               TextFormField(
                 controller: weightController,
