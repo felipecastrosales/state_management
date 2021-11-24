@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:state_management/state_management/setState/bmi_set_state_page.dart';
+import 'package:state_management/state_management/value_notifier/bmi_value_notifier_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -30,7 +31,10 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => _goToPage(
+                context,
+                const BMIValueNotifierPage(),
+              ),
               child: const Text('ValueNotifier'),
             ),
             const SizedBox(height: 20),

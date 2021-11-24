@@ -5,34 +5,29 @@ import 'package:flutter/material.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:intl/intl.dart';
 
-import 'bmi_gauge.dart';
+import 'package:state_management/widgets/bmi_gauge.dart';
 
-class BMISetStatePage extends StatefulWidget {
-  const BMISetStatePage({Key? key}) : super(key: key);
+class BMIValueNotifierPage extends StatefulWidget {
+  const BMIValueNotifierPage({Key? key}) : super(key: key);
 
   @override
-  _BMISetStatePageState createState() => _BMISetStatePageState();
+  _BMIValueNotifiertate createState() => _BMIValueNotifiertate();
 }
 
-class _BMISetStatePageState extends State<BMISetStatePage> {
+class _BMIValueNotifiertate extends State<BMIValueNotifierPage> {
   final formKey = GlobalKey<FormState>();
   final weightController = TextEditingController();
   final heightController = TextEditingController();
-  var bmi = 0.0;
+  var bmi = ValueNotifier(0.0);
 
   Future<void> _calculateBMI({
     required double weight,
     required double height,
   }) async {
-    setState(() {
-      bmi = 0.0;
-    });
-    await Future.delayed(const Duration(seconds: 1));
-    setState(() {
-      bmi = weight / pow(height, 2);
-    });
+    bmi.value = 0;
+    await Future.delayed(const Duration(milliseconds: 500));
+    bmi.value = weight / pow(height, 2);
   }
-
 
   @override
   void dispose() {
@@ -43,6 +38,8 @@ class _BMISetStatePageState extends State<BMISetStatePage> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: avoid_print
+    print('build');
     return Scaffold(
       appBar: AppBar(
         title: const Text('BMI | SetState'),
@@ -54,7 +51,14 @@ class _BMISetStatePageState extends State<BMISetStatePage> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                BMIGauge(bmi: bmi),
+                ValueListenableBuilder<double>(
+                  valueListenable: bmi,
+                  builder: (_, bmivalue, __) {
+                    // ignore: avoid_print
+                    print('build | ValueListenableBuilder');
+                    return BMIGauge(bmi: bmivalue);
+                  },
+                ),
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: weightController,
