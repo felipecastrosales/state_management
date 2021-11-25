@@ -11,10 +11,10 @@ class BMIValueNotifierPage extends StatefulWidget {
   const BMIValueNotifierPage({Key? key}) : super(key: key);
 
   @override
-  _BMIValueNotifiertate createState() => _BMIValueNotifiertate();
+  _BMIValueNotifierState createState() => _BMIValueNotifierState();
 }
 
-class _BMIValueNotifiertate extends State<BMIValueNotifierPage> {
+class _BMIValueNotifierState extends State<BMIValueNotifierPage> {
   final formKey = GlobalKey<FormState>();
   final weightController = TextEditingController();
   final heightController = TextEditingController();
