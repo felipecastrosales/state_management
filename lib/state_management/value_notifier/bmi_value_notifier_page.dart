@@ -42,7 +42,7 @@ class _BMIValueNotifierState extends State<BMIValueNotifierPage> {
     print('build');
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BMI | SetState'),
+        title: const Text('BMI | ValueNotifier'),
       ),
       body: SingleChildScrollView(
         child: Form(
