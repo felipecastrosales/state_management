@@ -4,6 +4,8 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:intl/intl.dart';
 
 import 'package:state_management/widgets/bmi_gauge.dart';
+import 'bmi_bloc_pattern_controller.dart';
+import 'bmi_state.dart';
 
 class BMIBlocPatternPage extends StatefulWidget {
   const BMIBlocPatternPage({Key? key}) : super(key: key);
@@ -13,23 +15,16 @@ class BMIBlocPatternPage extends StatefulWidget {
 }
 
 class _BMIBlocPatternPageState extends State<BMIBlocPatternPage> {
+  final controller = BMIBlocPatternController();
   final formKey = GlobalKey<FormState>();
   final weightController = TextEditingController();
   final heightController = TextEditingController();
-  var bmi = 0.0;
-
-  Future<void> _calculateBMI({
-    required double weight,
-    required double height,
-  }) async {
-
-  }
-
 
   @override
   void dispose() {
     weightController.dispose();
     heightController.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -46,7 +41,13 @@ class _BMIBlocPatternPageState extends State<BMIBlocPatternPage> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                BMIGauge(bmi: bmi),
+                StreamBuilder<BMIState>(
+                  stream: controller.bmiOut,
+                  builder: (context, snapshot) {
+                    var bmi = snapshot.data?.bmi ?? 0;
+                    return BMIGauge(bmi: bmi);
+                  },
+                ),
                 const SizedBox(height: 20),
                 TextFormField(
                   controller: weightController,
@@ -99,7 +100,7 @@ class _BMIBlocPatternPageState extends State<BMIBlocPatternPage> {
                           formatter.parse(weightController.text) as double;
                       double height =
                           formatter.parse(heightController.text) as double;
-                      _calculateBMI(
+                      controller.calculateBMI(
                         weight: weight,
                         height: height,
                       );
