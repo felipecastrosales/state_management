@@ -49,6 +49,21 @@ class _BMIBlocPatternPageState extends State<BMIBlocPatternPage> {
                   },
                 ),
                 const SizedBox(height: 20),
+                StreamBuilder<BMIState>(
+                  stream: controller.bmiOut,
+                  builder: (context, snapshot) {
+                    final dataValue = snapshot.data;
+                    if (dataValue is BMIStateLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    if (dataValue is BMIStateError) {
+                      return Text(dataValue.message);
+                    }
+                    return const SizedBox.shrink();
+                  },
+                ),
                 TextFormField(
                   controller: weightController,
                   validator: (String? value) {
