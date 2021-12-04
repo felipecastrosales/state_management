@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:intl/intl.dart';
 
-import 'package:state_management/widgets/bmi_gauge.dart';
+import 'package:bmi/widgets/bmi_gauge.dart';
 
 class BMIValueNotifierPage extends StatefulWidget {
   const BMIValueNotifierPage({Key? key}) : super(key: key);
@@ -38,7 +38,6 @@ class _BMIValueNotifierState extends State<BMIValueNotifierPage> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: avoid_print
     print('build');
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +53,6 @@ class _BMIValueNotifierState extends State<BMIValueNotifierPage> {
                 ValueListenableBuilder<double>(
                   valueListenable: bmi,
                   builder: (_, bmivalue, __) {
-                    // ignore: avoid_print
                     print('build | ValueListenableBuilder');
                     return BMIGauge(bmi: bmivalue);
                   },

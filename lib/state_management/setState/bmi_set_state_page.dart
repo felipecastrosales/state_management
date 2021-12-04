@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:intl/intl.dart';
 
-import 'package:state_management/widgets/bmi_gauge.dart';
+import 'package:bmi/widgets/bmi_gauge.dart';
 
 class BMISetStatePage extends StatefulWidget {
   const BMISetStatePage({Key? key}) : super(key: key);
@@ -42,7 +42,6 @@ class _BMISetStatePageState extends State<BMISetStatePage> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: avoid_print
     print('build');
     return Scaffold(
       appBar: AppBar(

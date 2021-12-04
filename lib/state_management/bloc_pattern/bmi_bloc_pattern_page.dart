@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:intl/intl.dart';
 
-import 'package:state_management/widgets/bmi_gauge.dart';
+import 'package:bmi/widgets/bmi_gauge.dart';
 import 'bmi_bloc_pattern_controller.dart';
 import 'bmi_state.dart';
 

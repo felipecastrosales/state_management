@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:state_management/state_management/bloc_pattern/bmi_bloc_pattern_page.dart';
-import 'package:state_management/state_management/change_notifier/bmi_change_notifier_page.dart';
-import 'package:state_management/state_management/setState/bmi_set_state_page.dart';
-import 'package:state_management/state_management/value_notifier/bmi_value_notifier_page.dart';
+import 'package:bmi/state_management/bloc_pattern/bmi_bloc_pattern_page.dart';
+import 'package:bmi/state_management/change_notifier/bmi_change_notifier_page.dart';
+import 'package:bmi/state_management/setState/bmi_set_state_page.dart';
+import 'package:bmi/state_management/value_notifier/bmi_value_notifier_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
