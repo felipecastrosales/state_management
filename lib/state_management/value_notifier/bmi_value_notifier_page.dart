@@ -1,17 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:intl/intl.dart';
 
+import 'package:bmi/core/app_constants.dart';
 import 'package:bmi/widgets/bmi_gauge.dart';
 
 class BMIValueNotifierPage extends StatefulWidget {
-  const BMIValueNotifierPage({Key? key}) : super(key: key);
+  const BMIValueNotifierPage({super.key});
 
   @override
-  _BMIValueNotifierState createState() => _BMIValueNotifierState();
+  State<BMIValueNotifierPage> createState() => _BMIValueNotifierState();
 }
 
 class _BMIValueNotifierState extends State<BMIValueNotifierPage> {
@@ -64,17 +63,11 @@ class _BMIValueNotifierState extends State<BMIValueNotifierPage> {
                     if (value == null || value.isEmpty) {
                       return 'Mandatory Weight';
                     }
+                    return null;
                   },
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(labelText: 'Weight'),
-                  inputFormatters: [
-                    CurrencyTextInputFormatter(
-                      locale: 'pt_BR',
-                      symbol: '',
-                      decimalDigits: 2,
-                      turnOffGrouping: true,
-                    ),
-                  ],
+                  inputFormatters: AppConstants.bmiInputFormatterr,
                   onChanged: (String value) {},
                 ),
                 TextFormField(
@@ -83,17 +76,11 @@ class _BMIValueNotifierState extends State<BMIValueNotifierPage> {
                     if (value == null || value.isEmpty) {
                       return 'Mandatory Height';
                     }
+                    return null;
                   },
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(labelText: 'Height'),
-                  inputFormatters: [
-                    CurrencyTextInputFormatter(
-                      locale: 'pt_BR',
-                      symbol: '',
-                      decimalDigits: 2,
-                      turnOffGrouping: true,
-                    ),
-                  ],
+                  inputFormatters: AppConstants.bmiInputFormatterr,
                   onChanged: (String value) {},
                 ),
                 const SizedBox(height: 20),
