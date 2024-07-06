@@ -7,9 +7,9 @@ import 'bmi_gauge_range.dart';
 class BMIGauge extends StatelessWidget {
   final double bmi;
   const BMIGauge({
-    Key? key,
+    super.key,
     required this.bmi,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

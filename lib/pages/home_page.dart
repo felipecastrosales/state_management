@@ -6,7 +6,7 @@ import 'package:bmi/state_management/setState/bmi_set_state_page.dart';
 import 'package:bmi/state_management/value_notifier/bmi_value_notifier_page.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   void _goToPage(BuildContext context, Widget page) {
     Navigator.of(context).push(
